@@ -1,0 +1,41 @@
+{
+  "name": "bip136",
+  "version": "1.0.0",
+  "description": "A javascript library for encoding and decoding BIP136 TxRefs",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prettier": "prettier *.ts **/*.ts --write",
+    "test": "tsx --test test/test.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sangaman/bip136js.git"
+  },
+  "keywords": [
+    "bip136",
+    "bip 136",
+    "bip-136",
+    "txref",
+    "tx ref",
+    "bech32",
+    "bech32m"
+  ],
+  "author": "Daniel McNally <mcnallydp@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sangaman/bip136js/issues"
+  },
+  "homepage": "https://github.com/sangaman/bip136js#readme",
+  "dependencies": {
+    "bech32": "^2.0.0"
+  },
+  "files": ["index.js, index.d.ts"],
+  "devDependencies": {
+    "@types/node": "^20.4.5",
+    "prettier": "^3.0.1",
+    "tsx": "^3.12.7",
+    "typescript": "^5.1.6"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "include": [
+    "index.ts"
+  ],
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "declaration": true,
+    "types": [
+      "node"
+    ],
+    "allowJs": false,
+    "strict": true,
+    "esModuleInterop": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  }
+}
