@@ -7,7 +7,7 @@ This library goes beyond the spec to attempt to decode TxRefs that have had the 
 ## Installation
 
 ```
-npm i bip136js
+npm i bip136
 ```
 
 ## Usage
