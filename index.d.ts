@@ -1,16 +1,11 @@
-declare const network: readonly ['mainnet', 'testnet', 'regtest'];
+declare const network: readonly ["mainnet", "testnet", "regtest"];
 export type Network = (typeof network)[number];
-export declare function encode({
-  blockHeight,
-  txIndex,
-  outpoint,
-  network,
-}: Decoded): string;
+export declare function encode({ blockHeight, txIndex, outpoint, network, }: Decoded): string;
 export type Decoded = {
-  network: Network;
-  blockHeight: number;
-  txIndex: number;
-  outpoint?: number;
+    network: Network;
+    blockHeight: number;
+    txIndex: number;
+    outpoint?: number;
 };
 /**
  * @param encoded An encoded TxRef string with or without separators

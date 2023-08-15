@@ -104,27 +104,35 @@ export function decode(txRef: string): Decoded {
   // some txrefs may have had the HRP stripped off leaving just the payload
   // prepend the bech32 prefix and separator if needed to properly decode
   if (encoded.length === PAYLOAD_LENGTH_NO_OUTPOINT) {
-    if (encoded[0] === 'r') {
-      encoded = `${prefixes.mainnet}1${encoded}`;
-    } else if (encoded[0] === 'x') {
-      encoded = `${prefixes.testnet}1${encoded}`;
-    } else if (encoded[0] === 'q') {
-      encoded = `${prefixes.regtest}1${encoded}`;
-    } else {
-      throw new Error('txref magic code not recognized');
+    switch (encoded[0]) {
+      case 'r':
+        encoded = `${prefixes.mainnet}1${encoded}`;
+        break;
+      case 'x':
+        encoded = `${prefixes.testnet}1${encoded}`;
+        break;
+      case 'q':
+        encoded = `${prefixes.regtest}1${encoded}`;
+        break;
+      default:
+        throw new Error('txref magic code not recognized');
     }
   } else if (
     encoded.length === PAYLOAD_LENGTH_WITH_OUTPOINT &&
     !encoded.toLowerCase().startsWith('tx1')
   ) {
-    if (encoded[0] === 'y') {
-      encoded = `${prefixes.mainnet}1${encoded}`;
-    } else if (encoded[0] === '8') {
-      encoded = `${prefixes.testnet}1${encoded}`;
-    } else if (encoded[0] === 'p') {
-      encoded = `${prefixes.regtest}1${encoded}`;
-    } else {
-      throw new Error('txref magic code not recognized');
+    switch (encoded[0]) {
+      case 'y':
+        encoded = `${prefixes.mainnet}1${encoded}`;
+        break;
+      case '8':
+        encoded = `${prefixes.testnet}1${encoded}`;
+        break;
+      case 'p':
+        encoded = `${prefixes.regtest}1${encoded}`;
+        break;
+      default:
+        throw new Error('txref magic code not recognized');
     }
   }
 
