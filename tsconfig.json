@@ -3,15 +3,14 @@
     "index.ts"
   ],
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "commonjs",
-    "declaration": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "moduleResolution": "NodeNext",
+    "composite": true,
     "types": [
       "node"
     ],
-    "allowJs": false,
     "strict": true,
-    "esModuleInterop": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true
   }

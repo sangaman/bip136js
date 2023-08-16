@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.decode = exports.encode = void 0;
-const bech32_1 = require("bech32");
+import { bech32m } from 'bech32';
 const network = ['mainnet', 'testnet', 'regtest'];
 const PAYLOAD_LENGTH_NO_OUTPOINT = 15;
 const PAYLOAD_LENGTH_WITH_OUTPOINT = 18;
@@ -31,7 +28,7 @@ function addSeparators(encoded) {
     const separatedPayload = payload.match(/.{1,4}/g)?.join('-');
     return encoded.substring(0, separatorIndex) + '1:' + separatedPayload;
 }
-function encode({ blockHeight, txIndex, outpoint, network = 'mainnet', }) {
+export function encode({ blockHeight, txIndex, outpoint, network = 'mainnet', }) {
     const hasOutpoint = !!outpoint;
     const magicCode = magicCodes[network] + (hasOutpoint ? 1 : 0);
     const prefix = prefixes[network];
@@ -50,9 +47,8 @@ function encode({ blockHeight, txIndex, outpoint, network = 'mainnet', }) {
         words[10] |= (outpoint & 0x3e0) >> 5;
         words[11] |= (outpoint & 0x7c00) >> 10;
     }
-    return addSeparators(bech32_1.bech32m.encode(prefix, words));
+    return addSeparators(bech32m.encode(prefix, words));
 }
-exports.encode = encode;
 function removeNonBechCharacters(txRef) {
     const separatorIndex = txRef.indexOf('1');
     const payload = txRef.substring(separatorIndex + 1);
@@ -74,7 +70,7 @@ function removeNonBechCharacters(txRef) {
  * @param encoded An encoded TxRef string with or without separators
  * and with or without a human readable prefix.
  */
-function decode(txRef) {
+export function decode(txRef) {
     // strip separators and invalid characters before decoding
     let encoded = removeNonBechCharacters(txRef);
     // some txrefs may have had the HRP stripped off leaving just the payload
@@ -110,7 +106,7 @@ function decode(txRef) {
                 throw new Error('txref magic code not recognized');
         }
     }
-    const { prefix, words } = bech32_1.bech32m.decode(encoded);
+    const { prefix, words } = bech32m.decode(encoded);
     const magicCode = words[0];
     const prefixMagicCode = magicCodesByPrefix[prefix];
     const network = networkByPrefix[prefix];
@@ -150,4 +146,3 @@ function decode(txRef) {
     txIndex |= words[8] << 10;
     return { network, blockHeight, txIndex, outpoint };
 }
-exports.decode = decode;
