@@ -9,7 +9,7 @@
     "build": "tsc",
     "coverage": "c8 npm test",
     "lint": "eslint --quiet --fix --cache index.ts",
-    "prettier": "prettier *.ts **/*.ts --write",
+    "prettier": "prettier index.ts test/*.ts --write",
     "test": "tsx --test test/test.ts"
   },
   "repository": {
