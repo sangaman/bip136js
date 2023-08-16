@@ -1,6 +1,6 @@
 {
   "name": "bip136",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A javascript library for encoding and decoding BIP136 TxRefs",
   "main": "index.js",
   "type": "module",
@@ -33,7 +33,8 @@
     "bech32": "^2.0.0"
   },
   "files": [
-    "index.js", "index.d.ts"
+    "index.js",
+    "index.d.ts"
   ],
   "devDependencies": {
     "@types/node": "^20.4.5",
