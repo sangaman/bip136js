@@ -21,9 +21,7 @@
     "bip 136",
     "bip-136",
     "txref",
-    "tx ref",
-    "bech32",
-    "bech32m"
+    "tx ref"
   ],
   "author": "Daniel McNally <mcnallydp@gmail.com>",
   "license": "ISC",
