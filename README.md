@@ -1,5 +1,7 @@
 # bip136js
 
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=sangaman_bip136js)](https://sonarcloud.io/summary/new_code?id=sangaman_bip136js)
+
 A javascript library for encoding and decoding [BIP 136 TxRefs](https://github.com/bitcoin/bips/blob/master/bip-0136.mediawiki). This package passes all [test cases](https://github.com/bitcoin/bips/blob/master/bip-0136.mediawiki#user-content-Test_Examples) from the spec.
 
 This library goes beyond the spec to attempt to decode TxRefs that have had the [Human-Readable Part](https://github.com/bitcoin/bips/blob/master/bip-0136.mediawiki#user-content-HumanReadable_Part) (HRP) stripped off but are otherwise valid.
