@@ -33,7 +33,7 @@
     "bech32": "^2.0.0"
   },
   "files": [
-    "index.js, index.d.ts"
+    "index.js", "index.d.ts"
   ],
   "devDependencies": {
     "@types/node": "^20.4.5",
