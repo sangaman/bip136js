@@ -3,6 +3,7 @@ import { describe, it } from 'node:test';
 import { decode, encode } from '..';
 import {
   Fixture,
+  hrpStrippedTxRefs,
   invalidTxRefs,
   strangelyFormattedTxRefs,
   validTxRefs,
@@ -22,7 +23,7 @@ function decodeTest(fixture: Fixture) {
 }
 
 describe('BIP 136 TxRef encoding & decoding', () => {
-  describe('Decodes valid TxRefs', () => {
+  describe('decodes valid TxRefs', () => {
     validTxRefs.concat(validTxRefsZeroOutpoint).forEach(decodeTest);
   });
 
@@ -45,6 +46,10 @@ describe('BIP 136 TxRef encoding & decoding', () => {
 
   describe('decodes strangely formatted TxRefs', () => {
     strangelyFormattedTxRefs.forEach(decodeTest);
+  });
+
+  describe('decodes TxRefs with the HRP stripped off', () => {
+    hrpStrippedTxRefs.forEach(decodeTest);
   });
 
   describe('fails to decode invalid TxRefs', () => {

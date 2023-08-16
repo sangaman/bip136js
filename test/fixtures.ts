@@ -174,7 +174,9 @@ export const strangelyFormattedTxRefs: Fixture[] = [
     txIndex: 1234,
     network: 'mainnet',
   },
-  // tests without the HRP
+];
+
+export const hrpStrippedTxRefs: Fixture[] = [
   {
     txRef: 'y29u-mqjx-ppqq-sfp2-tt',
     blockHeight: 456789,
@@ -188,6 +190,32 @@ export const strangelyFormattedTxRefs: Fixture[] = [
     txIndex: 36,
     network: 'testnet',
   },
+  {
+    txRef: 'rx7s-qq4f-qmxg-ahs',
+    blockHeight: 8675,
+    txIndex: 309,
+    network: 'mainnet',
+  },
+  {
+    txRef: 'qx7s-qq4f-qmvx-zpa',
+    blockHeight: 8675,
+    txIndex: 309,
+    network: 'regtest',
+  },
+  {
+    txRef: '8x7s-qq4f-qpqq-tkt0-lw',
+    blockHeight: 8675,
+    txIndex: 309,
+    outpoint: 1,
+    network: 'testnet',
+  },
+  {
+    txRef: 'px7s-qq4f-qpqq-4xtt-8x',
+    blockHeight: 8675,
+    txIndex: 309,
+    outpoint: 1,
+    network: 'regtest',
+  },
 ];
 
 export const invalidTxRefs = [
@@ -196,4 +224,11 @@ export const invalidTxRefs = [
   'tx1:r7ll-llll-lqfu-gss2',
   'tx1:r7ll-llll-rt5h-wz',
   'tx1:r7ll-LLLL-lp6m-78v',
+  // unrecognized prefix
+  'notatx1:yjar-qqpq-qrqq-0ru9-ss',
+  // invalid magic code
+  'tx1:zjar-qqpq-qrqq-fm29-3u',
+  // HRP stripped with invalid magic code
+  'yx7s-qq4f-qfss-e4z',
+  '9x7s-qq4f-qpqq-64qz-fk',
 ];

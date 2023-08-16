@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "A javascript library for encoding and decoding BIP136 TxRefs",
   "main": "index.js",
+  "type": "module",
   "types": "index.d.ts",
   "scripts": {
     "build": "tsc",
+    "coverage": "c8 npm test",
     "prettier": "prettier *.ts **/*.ts --write",
     "test": "tsx --test test/test.ts"
   },
@@ -31,9 +33,12 @@
   "dependencies": {
     "bech32": "^2.0.0"
   },
-  "files": ["index.js, index.d.ts"],
+  "files": [
+    "index.js, index.d.ts"
+  ],
   "devDependencies": {
     "@types/node": "^20.4.5",
+    "c8": "^8.0.1",
     "prettier": "^3.0.1",
     "tsx": "^3.12.7",
     "typescript": "^5.1.6"
