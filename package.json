@@ -8,6 +8,7 @@
   "scripts": {
     "build": "tsc",
     "coverage": "c8 npm test",
+    "lint": "eslint --quiet --fix --cache index.ts",
     "prettier": "prettier *.ts **/*.ts --write",
     "test": "tsx --test test/test.ts"
   },
@@ -38,7 +39,11 @@
   ],
   "devDependencies": {
     "@types/node": "^20.4.5",
+    "@typescript-eslint/eslint-plugin": "^6.4.0",
     "c8": "^8.0.1",
+    "eslint": "^8.47.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-node": "^11.1.0",
     "prettier": "^3.0.1",
     "tsx": "^3.12.7",
     "typescript": "^5.1.6"
