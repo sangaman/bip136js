@@ -49,7 +49,13 @@ export function encode({ blockHeight, txIndex, outpoint, network = 'mainnet', })
     }
     return addSeparators(bech32m.encode(prefix, words));
 }
-function removeNonBechCharacters(txRef) {
+/**
+ * Strips invalid characters that are not part of bech32 alphabet from an
+ * encoded TxRef string.
+ * @param txRef A raw TxRef we are expected to decode
+ * @returns A TxRef string without any invalid characters
+ */
+function stripNonBechCharacters(txRef) {
     const separatorIndex = txRef.indexOf('1');
     const payload = txRef.substring(separatorIndex + 1);
     const strippedPayload = payload.replace(/[^ac-hj-np-zAC-HJ-NP-Z02-9]/g, '');
@@ -67,45 +73,55 @@ function removeNonBechCharacters(txRef) {
     }
 }
 /**
+ * Appends the HRP prefix to a TxRef string if it is not already present.
+ * @param strippedTxRef A TxRef stripped of any invalid characters
+ * @returns A TxRef with the appropriate HRP bech prefix. If the provided TxRef
+ * already had a prefix, it is returned unmodified.
+ *
+ */
+function appendHrpPrefixIfMissing(strippedTxRef) {
+    // some txrefs may have had the HRP stripped off leaving just the payload
+    // prepend the bech32 prefix and separator if needed to properly decode
+    if (strippedTxRef.length === PAYLOAD_LENGTH_NO_OUTPOINT) {
+        switch (strippedTxRef[0]) {
+            case 'r':
+                return `${prefixes.mainnet}1${strippedTxRef}`;
+            case 'x':
+                return `${prefixes.testnet}1${strippedTxRef}`;
+            case 'q':
+                return `${prefixes.regtest}1${strippedTxRef}`;
+            default:
+                throw new Error('txref magic code not recognized');
+        }
+    }
+    else if (strippedTxRef.length === PAYLOAD_LENGTH_WITH_OUTPOINT &&
+        !strippedTxRef.toLowerCase().startsWith('tx1')) {
+        switch (strippedTxRef[0]) {
+            case 'y':
+                return `${prefixes.mainnet}1${strippedTxRef}`;
+            case '8':
+                return `${prefixes.testnet}1${strippedTxRef}`;
+            case 'p':
+                return `${prefixes.regtest}1${strippedTxRef}`;
+            default:
+                throw new Error('txref magic code not recognized');
+        }
+    }
+    return strippedTxRef;
+}
+/**
+ * Sanitizes a TxRef so it can be successfully decoded as a bech32 string.
+ */
+function sanitizeTxRef(txRef) {
+    const strippedTxRef = stripNonBechCharacters(txRef);
+    return appendHrpPrefixIfMissing(strippedTxRef);
+}
+/**
  * @param encoded An encoded TxRef string with or without separators
  * and with or without a human readable prefix.
  */
 export function decode(txRef) {
-    // strip separators and invalid characters before decoding
-    let encoded = removeNonBechCharacters(txRef);
-    // some txrefs may have had the HRP stripped off leaving just the payload
-    // prepend the bech32 prefix and separator if needed to properly decode
-    if (encoded.length === PAYLOAD_LENGTH_NO_OUTPOINT) {
-        switch (encoded[0]) {
-            case 'r':
-                encoded = `${prefixes.mainnet}1${encoded}`;
-                break;
-            case 'x':
-                encoded = `${prefixes.testnet}1${encoded}`;
-                break;
-            case 'q':
-                encoded = `${prefixes.regtest}1${encoded}`;
-                break;
-            default:
-                throw new Error('txref magic code not recognized');
-        }
-    }
-    else if (encoded.length === PAYLOAD_LENGTH_WITH_OUTPOINT &&
-        !encoded.toLowerCase().startsWith('tx1')) {
-        switch (encoded[0]) {
-            case 'y':
-                encoded = `${prefixes.mainnet}1${encoded}`;
-                break;
-            case '8':
-                encoded = `${prefixes.testnet}1${encoded}`;
-                break;
-            case 'p':
-                encoded = `${prefixes.regtest}1${encoded}`;
-                break;
-            default:
-                throw new Error('txref magic code not recognized');
-        }
-    }
+    const encoded = sanitizeTxRef(txRef);
     const { prefix, words } = bech32m.decode(encoded);
     const magicCode = words[0];
     const prefixMagicCode = magicCodesByPrefix[prefix];
