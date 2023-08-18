@@ -1,6 +1,7 @@
 import { bech32m } from 'bech32';
 
 const network = ['mainnet', 'testnet', 'regtest'] as const;
+/** Supported bitcoin networks */
 export type Network = (typeof network)[number];
 
 const PAYLOAD_LENGTH_NO_OUTPOINT = 15;
@@ -37,12 +38,26 @@ function addSeparators(encoded: string) {
   return encoded.substring(0, separatorIndex) + '1:' + separatedPayload;
 }
 
+/**
+ * The data parts encoded by a TxRef
+ */
+export type DataParts = {
+  network: Network;
+  blockHeight: number;
+  txIndex: number;
+  outpoint?: number;
+};
+
+/**
+ * Encodes a `blockheight`, `txIndex`, and optionally `network` and/or
+ * `outpoint` into a TxRef string.
+ */
 export function encode({
   blockHeight,
   txIndex,
   outpoint,
   network = 'mainnet',
-}: Decoded): string {
+}: DataParts): string {
   const hasOutpoint = !!outpoint;
   const magicCode = magicCodes[network] + (hasOutpoint ? 1 : 0);
   const prefix = prefixes[network];
@@ -69,13 +84,6 @@ export function encode({
 
   return addSeparators(bech32m.encode(prefix, words));
 }
-
-export type Decoded = {
-  network: Network;
-  blockHeight: number;
-  txIndex: number;
-  outpoint?: number;
-};
 
 /**
  * Strips invalid characters that are not part of bech32 alphabet from an
@@ -147,10 +155,11 @@ function sanitizeTxRef(txRef: string) {
 }
 
 /**
- * @param encoded An encoded TxRef string with or without separators
+ * Decodes a TxRef string into its data parts such as `blockHeight` and `txIndex`.
+ * @param txRef An encoded TxRef string with or without separators
  * and with or without a human readable prefix.
  */
-export function decode(txRef: string): Decoded {
+export function decode(txRef: string): DataParts {
   const encoded = sanitizeTxRef(txRef);
 
   const { prefix, words } = bech32m.decode(encoded);

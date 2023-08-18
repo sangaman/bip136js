@@ -28,6 +28,10 @@ function addSeparators(encoded) {
     const separatedPayload = payload.match(/.{1,4}/g)?.join('-');
     return encoded.substring(0, separatorIndex) + '1:' + separatedPayload;
 }
+/**
+ * Encodes a `blockheight`, `txIndex`, and optionally `network` and/or
+ * `outpoint` into a TxRef string.
+ */
 export function encode({ blockHeight, txIndex, outpoint, network = 'mainnet', }) {
     const hasOutpoint = !!outpoint;
     const magicCode = magicCodes[network] + (hasOutpoint ? 1 : 0);
@@ -117,7 +121,8 @@ function sanitizeTxRef(txRef) {
     return appendHrpPrefixIfMissing(strippedTxRef);
 }
 /**
- * @param encoded An encoded TxRef string with or without separators
+ * Decodes a TxRef string into its data parts such as `blockHeight` and `txIndex`.
+ * @param txRef An encoded TxRef string with or without separators
  * and with or without a human readable prefix.
  */
 export function decode(txRef) {
