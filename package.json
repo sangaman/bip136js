@@ -8,8 +8,11 @@
   "scripts": {
     "build": "tsc",
     "coverage": "c8 npm test",
+    "coverage-ci": "c8 --reporter=lcov npm test",
     "lint": "eslint --quiet --fix --cache index.ts",
+    "lint-check": "eslint index.ts",
     "prettier": "prettier index.ts test/*.ts --write",
+    "prettier-check": "prettier index.ts test/*.ts --check",
     "test": "tsx --test test/test.ts"
   },
   "repository": {
