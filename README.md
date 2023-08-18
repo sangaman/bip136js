@@ -1,6 +1,11 @@
 # bip136js
 
-[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=sangaman_bip136js)](https://sonarcloud.io/summary/new_code?id=sangaman_bip136js)
+![GitHub Actions Build](https://github.com/sangaman/bip136js/actions/workflows/main.yaml/badge.svg)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=sangaman_bip136js&metric=coverage)](https://sonarcloud.io/summary/new_code?id=sangaman_bip136js)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=sangaman_bip136js&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=sangaman_bip136js)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=sangaman_bip136js&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=sangaman_bip136js)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=sangaman_bip136js&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=sangaman_bip136js)[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=sangaman_bip136js&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=sangaman_bip136js)
+[![License: ISC](https://img.shields.io/badge/License-ISC%202.0-brightgreen.svg)](https://opensource.org/licenses/ISC)
 
 A javascript library for encoding and decoding [BIP 136 TxRefs](https://github.com/bitcoin/bips/blob/master/bip-0136.mediawiki). This package passes all [test cases](https://github.com/bitcoin/bips/blob/master/bip-0136.mediawiki#user-content-Test_Examples) from the spec.
 
