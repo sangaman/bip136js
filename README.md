@@ -5,6 +5,7 @@
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=sangaman_bip136js&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=sangaman_bip136js)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=sangaman_bip136js&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=sangaman_bip136js)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=sangaman_bip136js&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=sangaman_bip136js)[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=sangaman_bip136js&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=sangaman_bip136js)
+[![Socket Badge](https://socket.dev/api/badge/npm/package/bip136)](https://socket.dev/npm/package/bip136)
 [![License: ISC](https://img.shields.io/badge/License-ISC%202.0-brightgreen.svg)](https://opensource.org/licenses/ISC)
 
 A javascript library for encoding and decoding [BIP 136 TxRefs](https://github.com/bitcoin/bips/blob/master/bip-0136.mediawiki). This package passes all [test cases](https://github.com/bitcoin/bips/blob/master/bip-0136.mediawiki#user-content-Test_Examples) from the spec.
